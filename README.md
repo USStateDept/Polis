@@ -87,7 +87,7 @@ This is a brief walkthrough for getting the system up and running.
 
 4. Set up `config.py`:
 
-   Copy `\_config.py` to `config.py`. `config.py` is not watched, as it contains secret information that should not be shared.
+   Copy `_config.py` to `config.py`. `config.py` is not watched, as it contains secret information that should not be shared.
    `root_dir` should be set to the **full path** of the Polis root directory, and should NOT contain a trailing slash, e.g. `/home/ec2-user/polis`.
    `default_password` is for the Admin user of the web app, and should be reasonably strong, as this would allow others to edit data in your system.
    `secret_key` should be a random string of at least 32 characters; used to track sessions in the web app.
@@ -96,13 +96,14 @@ This is a brief walkthrough for getting the system up and running.
 
 5. Set up `APIKeys.py`:
 
-   Copy `\_APIKeys.py` to `APIKeys.py`. This is for the app-specific keys to the Twitter API.
+   Copy `_APIKeys.py` to `APIKeys.py`. This is for the app-specific keys to the Twitter API.
 
 6. Start MongoDB using the mongod daemon; Polis currently assumes the default port of 27017.
 
 7. Running the content categorization tool on a training set:
 
    `$ python nbayes_classify.py {twitter|rss} --in {in_file} --test {test_file}`
+
    Both `in_file` and `test_file` should be in the "OpenNLP" style, tab-delimited and one "document" per line (curly braces should be omitted):
 
    {Label}{tab}{Content}

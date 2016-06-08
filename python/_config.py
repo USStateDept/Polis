@@ -4,7 +4,7 @@
 
 DEFAULT = {
   # The absolute path that includes the "polis" directory
-  "root_dir": "/Users/shane/Documents/polis"
+  "root_dir": ""
 }
 
 c = {
@@ -79,7 +79,7 @@ c = {
   },
   "webapp":{
     "username": "admin",
-    "default_pwd": "Politeia",
-    "secret_key": "098c3e6753a04197f7fc2daa0f7c8c87"
+    "default_pwd": "",
+    "secret_key": ""
   }
 }

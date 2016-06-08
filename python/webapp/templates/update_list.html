@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!-- FLASHED MESSAGE START -->
+
+{% for message in get_flashed_messages() %}
+<div class="row">
+  <div class="success callout">
+    <h5 class="flash">{{ message }}</h5>
+  </div>
+</div>
+{% endfor %}
+
+<!-- FLASHED MESSAGE END -->
+
+<!-- LIST START -->
+
+<div class="row">
+  <div class="small-12 columns callout secondary">
+    <h2>Admin page <small>Modify or add profiles</small></h2>
+    <a href="{{ url_for('add_entry') }}" class="button large expanded hollow secondary">Add new profile</a>
+
+    {% for entry in lst %}
+
+      <a class="button large expanded hollow" href="{{ url_for('update_entry', uid=entry.id) }}">
+      {{ entry.title }}<br/>
+      <small>
+      {{ entry.name }}</small></a>
+    
+    {% endfor %}
+  </div>
+</div>
+
+<!-- LIST END -->
+
+<!-- SCRIPT START -->
+
+<script src="js/vendor/jquery.min.js"></script>
+<script src="js/vendor/what-input.min.js"></script>
+<script src="js/foundation.min.js"></script>
+<script src="chartist-dist/chartist.min.js"></script>
+<script>
+  $(document).foundation();
+</script>
+
+<!-- SCRIPT END -->
+
+{% endblock %}

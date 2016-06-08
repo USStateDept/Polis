@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!-- LOGIN START -->
+
+<div class="row">
+  <div class="small-12 large-6 small-centered columns secondary">
+    <div class="callout">
+      <h4>Login to add, change, or remove content</h4>
+      <form method="post">
+        <label>Username
+          <input type="text" name="username">
+        </label>
+        <label>Password
+          <input type="password" name="password">
+        </label>
+        <button type="submit" class="hollow button">Login</button>
+      </form>
+      {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="small-12 columns">
+    {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+  </div>
+</div> -->
+
+<!-- LOGIN END -->
+
+<!-- SCRIPT START -->
+
+<script src="{{ url_for('static', filename='js/vendor/jquery.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/vendor/what-input.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
+
+<script>
+  $(document).foundation();
+</script>
+
+<!-- SCRIPT END -->
+
+{% endblock %}

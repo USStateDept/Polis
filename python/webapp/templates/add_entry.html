@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!-- ADD FORM START -->
+
+<div class="row">
+  <div class="small-12 columns callout secondary">
+    <h2>New entry</h2>
+    <h3><small>This is to add cities to the system, please <a href="{{ url_for('update_list') }}">Update</a> existing profies to change them.</small></h3>
+    <form method="post">
+      
+      <h3>Location</h3>
+      <label>City
+        <input type="text" name="c_city">
+      </label>
+      <label>State/Province
+        <input type="text" name="c_state">
+      </label>
+      <label>Country
+        <input type="text" name="c_country">
+      </label>
+      <p class="help-text">Two-letter country codes, as 
+      <a target="_blank" href="http://www.worldatlas.com/aatlas/ctycodes.htm"> 
+      listed here</a>.</p>
+      
+      <hr/>
+      
+      <h3>Political Office</h3>
+      <label>Title
+        <input type="text" name="p_title">
+      </label>
+      <p class="help-text">E.g., Mayor, Governor, Manager</p>
+      <label>First Name
+        <input type="text" name="p_fname">
+      </label>
+      <label>Last Name
+        <input type="text" name="p_lname">
+      </label>
+      
+      <hr/>
+      
+      <h3>Linked Accounts, Pages, and Feeds</h3>
+      <p>Note: Polis is currently English-only. Inclusion of RSS Feeds and accounts that
+      are primarily in other languages will limit the usefulness of the tool.</p>
+      <label>Web Site
+        <input type="text" name="c_url">
+      </label>
+      <p class="help-text"></p>
+      <label>RSS Feed
+        <input type="text" name="p_url">
+      </label>
+      <p class="help-text"><a target="_blank" href="https://en.wikipedia.org/wiki/RSS">RSS feed</a> 
+      of news and official statements, if available</p>
+      
+      <h4>Twitter Account(s) <small>Don't include the leading @</small></h4>
+      <label>Twitter Account - Office
+        <input type="text" name="c_twitter">
+      </label>
+      <p class="help-text">City or Mayor's office accout, e.g. LBMayorsOffice, ChicagosMayor</p>
+      
+      <label>Twitter Account - Public Figure
+        <input type="text" name="p_twitter">
+      </label>
+      <p class="help-text">Account in which the currently-serving mayor identifies themself as such, e.g., RobertGarciaLB, MayorSwearengin</p>
+
+      <button type="submit" class="hollow button">Create</button>
+    </form>
+  </div>
+</div>
+
+<!-- ADD FORM END -->
+
+<!-- SCRIPT START -->
+
+<script src="{{ url_for('static', filename='js/vendor/jquery.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/vendor/what-input.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
+
+<script>
+  $(document).foundation();
+</script>
+
+<!-- SCRIPT END -->
+
+{% endblock %}

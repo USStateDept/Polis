@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!-- OVERVIEW START -->
+
+<div class="row">
+  <div class="small-12 columns callout secondary">
+      <h3>{{ info.title }}
+        {% if info.tw_c %}
+        <small><a href="https://twitter.com/{{ info.tw_c }}"> @{{ info.tw_c }}</a></small>
+        {% endif %}
+      </h3>
+      <h3 class="subheader">{{ info.name }}
+        {% if info.tw_p %}
+        <small><a href="https://twitter.com/{{ info.tw_p }}"> @{{ info.tw_p }}</a></small>
+        {% endif %}
+      </h3>
+      <hr/>
+      <h4>Policy Profile</h4>
+      <div class="ct-chart"></div>
+<!-- Need to add query for this
+      <hr/>
+      <h4>Based on an analysis of</h4>
+      <h5>78 news articles, ranging from 2015-10-01 to 2016-04-10</h5>
+      <h5>358 Twitter status updates, ranging from 2015-07-01 to 2016-04-10</h5> -->
+  </div>
+</div>
+
+<!-- OVERVIEW END -->
+
+<!-- DATA FEED START -->
+
+<div class="row">
+  <div id="feed_container" class="callout secondary">
+    <h3>Recent Activity</h3>
+
+    {% for entry in activity %}
+
+    <hr/>
+    <div>
+      <a href="https://twitter.com/{{ entry.uname }}"> {{ entry.uname }}</a>
+      {% if entry.source == 'twitter' %}
+      <small> - Twitter</small>
+      {% endif %}
+      <p>
+        <span class="label">{{ entry.category }}</span>
+        {{ entry.document }}
+        <small>{{ entry.date }}</small>
+      </p>
+      <a class="button small expanded hollow" href="{{ entry.link }}">Link</a>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+
+<!-- DATA FEED END -->
+
+<!-- SCRIPT START -->
+<script src="{{ url_for('static', filename='js/vendor/jquery.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/vendor/what-input.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
+<script src="{{ url_for('static', filename='chartist-dist/chartist.min.js')}}"></script>
+
+<script>
+  $(document).foundation();
+</script>
+<script type="text/javascript">
+
+  var chart = new Chartist.Bar('.ct-chart', {
+    labels: {{ labels|safe }},
+    series: {{ series }}
+  }, {
+    //distributeSeries: true,
+    horizontalBars: true,
+    axisX: {
+      onlyInteger: true,
+      offset: 20
+    },
+    seriesBarDistance: 10, // this and below are to fix the height, etc.
+    fullWidth: true,
+    //showArea:true,
+    height:'250px'
+  });
+
+  // Currently a workaround as we don't expose the value and series as raw objects in the events to access them. This should be fixed with https://github.com/gionkunz/chartist-js/issues/293
+  var seriesIndex = -1;
+  chart.on('created', function() {
+    // reset series counter
+    seriesIndex = -1;
+  });
+
+  chart.on('draw', function(context) {
+    if(context.type === 'bar') {
+      if(context.index === 0) {
+        seriesIndex++;
+      }
+      
+      var seriesName = chart.data.series[seriesIndex].name;
+      
+      context.element.root().elem('text', {
+        y: context.y1 -10,
+        x: 55
+      }, 'ct-bar-label').text(context.value.x);
+    }
+  });
+
+</script>
+
+<!-- SCRIPT END -->
+
+{% endblock %}

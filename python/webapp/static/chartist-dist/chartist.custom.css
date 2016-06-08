@@ -1,0 +1,45 @@
+/* LINE CHART modifiers */
+.ct-series-a .ct-line {
+  /* Set the colour of this series line */
+  stroke: #ec5840;
+}
+
+.ct-series-b .ct-line {
+  /* Set the colour of this series line */
+  stroke: #777;
+}
+
+.ct-series-c .ct-line {
+  /* Set the colour of this series line */
+  stroke: #3adb76;
+}
+
+.ct-series-d .ct-line {
+  /* Set the colour of this series line */
+  stroke: #2ba6cb;
+}
+
+
+/* BAR CHART MODIFIERS */
+.ct-series-a .ct-bar {
+  /* Set the colour of this series line */
+  stroke: #2c3e50;
+  /* The width of your bars */
+  stroke-width: 40px;
+}
+
+/* remove grid and add data labels */
+.ct-bar-label {
+  text-anchor: before-edge;
+  alignment-baseline: hanging;
+  fill: white;
+  font-weight: bold;
+}
+
+.ct-chart-bar .ct-grid {
+  display: none;
+}
+
+.ct-chart-bar .ct-label.ct-horizontal {
+  display: none;
+}

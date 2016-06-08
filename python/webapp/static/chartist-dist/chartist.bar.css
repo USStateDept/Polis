@@ -1,0 +1,43 @@
+/* BAR CHART modifiers */
+.ct-series-a .ct-bar {
+  /* Set the colour of this series line */
+  stroke: #2c3e50;
+  /* The width of your bars */
+  stroke-width: 40px;
+}
+
+
+/* Below are the rules for making this a divergent series (i.e., multicolor)
+/*
+.ct-series-b .ct-bar {
+  stroke: #777;
+  stroke-width: 40px;
+}
+
+.ct-series-c .ct-bar {
+  stroke: #3adb76;
+  stroke-width: 40px;
+}
+
+.ct-series-d .ct-bar {
+  stroke: #2ba6cb;
+  stroke-width: 40px;
+}
+
+*/
+
+/* remove grid and add data labels */
+.ct-bar-label {
+  text-anchor: before-edge;
+  alignment-baseline: hanging;
+  fill: white;
+  font-weight: bold;
+}
+
+.ct-grid {
+  display: none;
+}
+
+.ct-label.ct-horizontal {
+  display: none;
+}

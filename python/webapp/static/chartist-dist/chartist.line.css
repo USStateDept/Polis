@@ -1,0 +1,21 @@
+/* LINE CHART modifiers */
+.ct-series-a .ct-line {
+  /* Set the colour of this series line */
+  stroke: #ec5840;
+}
+
+.ct-series-b .ct-line {
+  /* Set the colour of this series line */
+  stroke: #777;
+}
+
+.ct-series-c .ct-line {
+  /* Set the colour of this series line */
+  stroke: #3adb76;
+}
+
+.ct-series-d .ct-line {
+  /* Set the colour of this series line */
+  stroke: #2ba6cb;
+}
+

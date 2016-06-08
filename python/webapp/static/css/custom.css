@@ -1,0 +1,8 @@
+div#flashy-title {
+  background-image: url("../img/Acropolis.jpg");
+  background-position: top left;
+}
+
+div#flashy-title h1 {color: #2c3e50;}
+
+li.menu-text {display: none;}

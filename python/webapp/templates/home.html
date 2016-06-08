@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!-- FLASHED MESSAGE START -->
+
+{% for message in get_flashed_messages() %}
+<div class="row">
+  <div class="success callout">
+    <h5 class="flash">{{ message }}</h5>
+  </div>
+</div>
+{% endfor %}
+
+<!-- FLASHED MESSAGE END -->
+
+<!-- OVERVIEW START -->
+<div class="row">
+  <div class="small-12 columns callout secondary">
+      <h2>Policy Snapshot</h2>
+      <h3 class="subheader">Activity from the last week</h3>
+      <div class="ct-chart"></div>
+      <a class="button small hollow secondary" href="{{ url_for('about') }}">What does this mean?</a>
+  </div>
+</div>
+<!-- OVERVIEW END -->
+
+<!-- STATUS OVERVIEW START -->
+
+<div class="row">
+  <div class="small-12 columns callout secondary">
+    <h3>Current Status <br/>
+<!-- Not implemented      <small>
+      Last update: 
+      11:30 2016-02-15 EST
+      </small> -->
+    </h3>
+    <hr/>
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+        <p>Number of subnational political figures and offices</p>
+        <div class="stat">{{ sum_stats.people_count }}</div>
+        <p>Total number of articles and posts</p>
+        <div class="stat">{{ sum_stats.content_count }}</div>
+        <p>Number of categorized articles and posts</p>
+        <div class="stat">{{ sum_stats.labeled_count }}</div>
+        <h2></h2> <!-- shim -->
+      </div>
+      <div class="small-12 medium-6 columns">
+        <div class="callout">
+          <p>Questions, comments, or problems?</p>
+          <a class="button expanded hollow" href="mailto:trasks@state.gov">Email us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATUS OVERVIEW END -->
+
+<!-- LINKS START -->
+
+<div class="row">
+  <div class="small-12 columns callout secondary">
+
+    <a class="button expanded hollow large" href="{{ url_for('profiles') }}">Individual Offices</a>
+    <p>An exploration of public statements and news articles from policymakers
+    that connect to QDDR policy areas.</p>
+
+    <hr/>
+
+    <a class="button expanded hollow large" href="{{ url_for('timeline') }}">Issues Overview</a>
+    <p>A big-picture overview of the public policy landscape as it relates to subnational
+    policymakers and the QDDR policy areas.</p>
+
+    <a class="button expanded hollow large" href="{{ url_for('about') }}">About</a>
+    <p>A brief primer on the technology use in this app, what to expect from it, and some case
+    studies that explore it's intended use.</p>
+
+  </div>
+</div>
+
+<!-- LINKS END -->
+
+<!-- SCRIPT START -->
+
+<script src="{{ url_for('static', filename='js/vendor/jquery.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/vendor/what-input.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
+<script src="{{ url_for('static', filename='chartist-dist/chartist.min.js')}}"></script>
+
+<script>
+  $(document).foundation();
+</script>
+
+<script type="text/javascript">
+
+  var chart = new Chartist.Bar('.ct-chart', {
+    labels: {{ labels|safe }},
+    series: {{ series }}
+  }, {
+    //distributeSeries: true,
+    horizontalBars: true,
+    axisX: {
+      onlyInteger: true,
+      offset: 20
+    },
+    seriesBarDistance: 10, // this and below are to fix the height, etc.
+    fullWidth: true,
+    //showArea:true,
+    height:'250px'
+  });
+
+  // Currently a workaround as we don't expose the value and series as raw objects in 
+  // the events to access them. This should be fixed with 
+  // https://github.com/gionkunz/chartist-js/issues/293
+  var seriesIndex = -1;
+  chart.on('created', function() {
+    // reset series counter
+    seriesIndex = -1;
+  });
+
+  chart.on('draw', function(context) {
+    if(context.type === 'bar') {
+      if(context.index === 0) {
+        seriesIndex++;
+      }
+      
+      var seriesName = chart.data.series[seriesIndex].name;
+      
+      context.element.root().elem('text', {
+        y: context.y1 -10,
+        x: 55
+      }, 'ct-bar-label').text(context.value.x);
+    }
+  });
+
+</script>
+
+<!-- SCRIPT END -->
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!-- ABOUT START -->
+
+<div id="about" class="row">
+  <div class="small-12 columns callout secondary">
+    <h2>Polis is...</h2>
+    <p>A tool designed to better make sense of how subnational politicians
+    and policymankers view and prioritize issues across four thematic areas
+    outlined in the 2015 QDDR report:</p>
+    <p><span class="label alert">CVE</span> Combatting violent extremism</p>
+    <p><span class="label secondary">IEG</span> Promoting inclusive economic growth</p>
+    <p><span class="label success">MACC</span> Mitigating and adapting to climate change</p>
+    <p><span class="label">RODS</span> Creating resiliant and open democratic societies</p>
+    <p>Specifically, it is a <em>prototype web application</em> that collects and analyzes public statements 
+    by and about <strong>sub-national political public figures</strong> (i.e., mayors and governors) in order to 
+    better understand how - and on what issues - to engage with them.</p>
+  </div>
+</div>
+
+<!-- ABOUT END -->
+
+<!-- SCRIPT START -->
+
+<script src="{{ url_for('static', filename='js/vendor/jquery.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/vendor/what-input.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
+<script src="{{ url_for('static', filename='chartist-dist/chartist.min.js')}}"></script>
+
+<script>
+  $(document).foundation();
+</script>
+
+<!-- SCRIPT END -->
+
+{% endblock %}

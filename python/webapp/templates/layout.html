@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Polis</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='chartist-dist/chartist.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='chartist-dist/chartist.custom.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<div class="page">
+  <!-- MENU START -->
+  <div class="row">
+    <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+      <button class="menu-icon" type="button" data-toggle></button>
+      <div class="title-bar-title">Menu</div>
+    </div>
+
+    <div class="top-bar" id="example-menu">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text"></li>
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('profiles') }}">Profiles</a></li>
+          <li><a href="{{ url_for('timeline') }}">Issues</a></li>
+          <li><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu" data-dropdown-menu>
+          {% if session['logged_in'] == True %}
+          <li><a href="{{ url_for('update_list') }}" >Update</a></li>
+          <li><a href="{{ url_for('add_entry') }}" >New</a></li>
+          <li><a href="{{ url_for('logout') }}" class="button">Log out</a></li>
+          {% else %}
+          <li><a href="{{ url_for('login') }}" class="button">Admin</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <!-- MENU END -->
+
+  <div class="row">
+    <div id="flashy-title" class="small-12 columns callout">
+      <h1>Polis</h1>
+    </div>
+  </div>
+
+{% block body %}{% endblock %}
+</div>
+</html>

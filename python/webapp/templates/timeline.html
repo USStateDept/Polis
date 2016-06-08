@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <!-- ISSUE VIEW START -->
+
+    <div class="row">
+      <div class="small-12 columns callout secondary">
+        <h4>Policy Timeline</h4>
+        <p>
+          <span class="label alert">CVE</span>
+          <span class="label secondary">IEG</span>
+          <span class="label success">MACC</span>
+          <span class="label">RODS</span>
+        </p>
+        <div class="ct-chart"></div>
+      </div>
+    </div>
+
+    <!-- ISSUE VIEW END -->
+
+<!-- DATA FEED START -->
+
+<div class="row">
+  <div id="feed_container" class="callout secondary">
+    <h3>Recent Activity</h3>
+
+    {% for entry in activity %}
+
+    <hr/>
+    <div>
+      <a href="https://twitter.com/{{ entry.uname }}"> {{ entry.uname }}</a>
+      {% if entry.source == 'twitter' %}
+      <small> - Twitter</small>
+      {% endif %}
+      <p>
+        <span class="label">{{ entry.category }}</span>
+        {{ entry.document }}
+        <small>{{ entry.date }}</small>
+      </p>
+      <a class="button small expanded hollow" href="{{ entry.link }}">Link</a>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+
+<!-- DATA FEED END -->
+
+<!-- SCRIPT START -->
+
+<script src="{{ url_for('static', filename='js/vendor/jquery.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/vendor/what-input.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
+<script src="{{ url_for('static', filename='chartist-dist/chartist.min.js')}}"></script>
+
+<script>
+  $(document).foundation();
+</script>
+<script type="text/javascript">
+  new Chartist.Line('.ct-chart', {
+    labels: {{ labels|safe }},
+    series: {{ series }}
+  }, {
+    fullWidth: true,
+    //showArea:true,
+    height:'400px', // this and below are to fix the height
+    showPoint: false,
+    chartPadding: {
+      right: 40
+    }
+  });
+</script>
+
+<!-- SCRIPT END -->
+
+{% endblock %}

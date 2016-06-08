@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!-- LIST START -->
+
+<div class="row">
+  <div class="small-12 columns callout secondary">
+    {% for entry in lst %}
+
+      <a class="button large expanded hollow" href="{{ url_for('show_profile_for', uid=entry.id) }}">
+      {{ entry.title }}<br/>
+      <small>
+      {{ entry.name }}</small></a>
+    
+    {% endfor %}
+  </div>
+</div>
+
+<!-- LIST END -->
+
+<!-- SCRIPT START -->
+
+<script src="{{ url_for('static', filename='js/vendor/jquery.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/vendor/what-input.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/foundation.min.js')}}"></script>
+<script src="{{ url_for('static', filename='chartist-dist/chartist.min.js')}}"></script>
+
+<script>
+  $(document).foundation();
+</script>
+
+<!-- SCRIPT END -->
+
+{% endblock %}
